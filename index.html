@@ -1,32 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>I Love You</title>
+  <meta charset="UTF-8">
+  <title>Iloveeyouuuu</title>
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
       overflow: hidden;
-      background: linear-gradient(to bottom, #ffe6f0, #ffccff);
-      font-family: 'Arial', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
+      background: linear-gradient(120deg, #ffe0ec, #ffd6f6);
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
     }
 
-    h1, h2 {
+    .text {
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.5em;
       color: #ff1493;
-      font-size: 3em;
-      margin: 10px;
-      animation: fadeIn 3s ease-in-out infinite alternate;
+      text-shadow: 0 0 10px white;
+      animation: fallText 8s linear infinite, rotate3D 4s infinite ease-in-out;
+      white-space: nowrap;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0.6; }
-      to { opacity: 1; }
+    @keyframes fallText {
+      0% {
+        top: -50px;
+        opacity: 0;
+      }
+      30% {
+        opacity: 1;
+      }
+      100% {
+        top: 110%;
+        opacity: 0;
+      }
+    }
+
+    @keyframes rotate3D {
+      0% {
+        transform: translateX(-50%) rotateY(0deg) rotateX(0deg);
+      }
+      50% {
+        transform: translateX(-50%) rotateY(180deg) rotateX(20deg);
+      }
+      100% {
+        transform: translateX(-50%) rotateY(360deg) rotateX(0deg);
+      }
     }
 
     .flower {
@@ -34,15 +56,14 @@
       width: 40px;
       height: 40px;
       background-image: url('https://cdn-icons-png.flaticon.com/512/616/616408.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      animation: fall linear infinite;
+      background-size: cover;
+      animation: fallFlower linear infinite;
     }
 
-    @keyframes fall {
+    @keyframes fallFlower {
       0% {
-        transform: translateY(-100px) rotate(0deg);
-        opacity: 0.8;
+        transform: translateY(-60px) rotate(0deg);
+        opacity: 1;
       }
       100% {
         transform: translateY(110vh) rotate(360deg);
@@ -51,28 +72,38 @@
     }
 
     audio {
-      position: fixed;
-      bottom: 10px;
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>Iloveeeyouuuu</h1>
-  <h2>iloveeyoubabyy</h2>
   <audio autoplay loop>
-    <source src="https://dl.sndup.net/rjrp/I%20Love%20You%20So%20-%20The%20Walters.mp3" type="audio/mpeg">
+    <source src="final_custom_audio.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
   <script>
+    const messages = ["Iloveeyouuuu 💖", "iloveeyoubabyy 💕", "forever and always 💌"];
+    function createFallingText() {
+      const text = document.createElement("div");
+      text.className = "text";
+      text.innerText = messages[Math.floor(Math.random() * messages.length)];
+      text.style.left = Math.random() * window.innerWidth + "px";
+      text.style.animationDuration = (6 + Math.random() * 3) + "s";
+      document.body.appendChild(text);
+      setTimeout(() => text.remove(), 9000);
+    }
+
     function createFlower() {
       const flower = document.createElement("div");
-      flower.classList.add("flower");
+      flower.className = "flower";
       flower.style.left = Math.random() * window.innerWidth + "px";
-      flower.style.animationDuration = 3 + Math.random() * 5 + "s";
+      flower.style.animationDuration = (4 + Math.random() * 5) + "s";
       document.body.appendChild(flower);
-      setTimeout(() => flower.remove(), 8000);
+      setTimeout(() => flower.remove(), 10000);
     }
+
+    setInterval(createFallingText, 1000);
     setInterval(createFlower, 300);
   </script>
 </body>
